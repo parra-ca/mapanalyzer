@@ -1,0 +1,1 @@
+**You can see a little showcase with the most up-to-date MAP files, plot-data, and plots themselves (pdf), generated from these examples in [parra-ca.github.io/mapanalyzer/](https://parra-ca.github.io/mapanalyzer/)**

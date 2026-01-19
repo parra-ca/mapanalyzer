@@ -75,13 +75,13 @@ def human_size(nbytes: int) -> str:
         u += 1
 
     if units[u] == "B":
-        return f"{int(v)}B"
+        return f"{int(v)} B"
 
     if v.is_integer():
         s = str(int(v))
     else:
         s = f"{v:.1f}".rstrip("0").rstrip(".")
-    return f"{s}{units[u]}"
+    return f"{s} {units[u]}"
 
 
 def drop_last_line(md: str) -> str:
@@ -110,13 +110,16 @@ def render_file_groups_html(*, example_dir: Path, root: Path) -> str:
     grouped = files_by_subdir(example_dir)
     if not grouped:
         return ""
-
-    kind_lists: list[str] = []
+    example_name = example_dir.name
+    kind_list: list[str] = []
     for kind_name, kind_files in grouped.items():
         this_kind_items: list[str] = []
         for p in kind_files:
             size = human_size(p.stat().st_size)
-            display = p.name
+            display_parts = p.name.split('.')
+            display_parts[0] = display_parts[0].removeprefix(f'{example_name}-')
+            display_parts = display_parts[:1]+display_parts[2:]
+            display = '.'.join(display_parts)
             this_kind_items.append(
                 '<li class="file-item">'
                 f'<span class="file-size">{html.escape(size)}</span> '
@@ -124,14 +127,14 @@ def render_file_groups_html(*, example_dir: Path, root: Path) -> str:
                 "</li>"
             )
 
-        kind_lists.append(
+        kind_list.append(
             '<li class="kind-item">'
             f'<span class="kind-name">{html.escape(kind_name)}</span>\n'
             f'<ul class="file-list">\n' + "\n".join(this_kind_items) + "\n</ul>\n"
             "</li>"
         )
 
-    return '<ul class="kind-list">\n' + "\n".join(kind_lists) + "\n</ul>\n"
+    return '<ul class="kind-list">\n' + "\n".join(kind_list) + "\n</ul>\n"
 
 
 def render_items_html(*, root: Path, examples_base: Path) -> str:
@@ -147,7 +150,7 @@ def render_items_html(*, root: Path, examples_base: Path) -> str:
 
         # create title for this example
         href_id = example_name.replace(" ", "_").lower()
-        pretty_name = example_name.title()
+        pretty_name = example_name.replace("_", " ").title()
         src_link = BASELINK + example_name
         title_html = f'<h2 id="{href_id}" class="example-title">' +\
             f'{html.escape(pretty_name)} (<a href="{src_link}">source</a>)' +\
@@ -185,6 +188,7 @@ def render_items_html(*, root: Path, examples_base: Path) -> str:
                         '</div>')
 
     return '\n'.join(examples)
+
 
 def main() -> int:
     if len(sys.argv) >= 2:

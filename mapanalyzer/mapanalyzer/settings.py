@@ -1053,7 +1053,6 @@ class Settings:
                 guess_ress = round(0.9*max(width,height)*dpi)
             else:
                 try:
-                    print("res:", res)
                     guess_res = int(res)
                 except:
                     UI.error(f'Error: MAP Resolution must be an integer or "auto".')

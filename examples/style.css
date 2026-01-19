@@ -1,6 +1,8 @@
 :root {
     font-family: Sans;
-    font-weight: lighter;
+}
+body {
+    padding-bottom: 4em;
 }
 h1 {
     text-align: center;
@@ -14,7 +16,7 @@ p.subtitle {
     padding: 0;
     text-align: center;
 }
-.intro{
+.intro {
     margin-block: 1em;
     padding: 1em;
     max-width: 80ch;
@@ -36,40 +38,53 @@ p.subtitle {
 .example-title {
     margin: 0.2em;
 }
+.kind-list {
+    padding-left: 1em;
+    overflow-x: scroll;
+}
 .file-list {
-    margin-top: 0.2em;
+    padding-left: 1em;
+    margin-bottom: 0.5em;
+    overflow-x: auto;
+    scroll-gutter: stable;
 }
 .file-size {
-    min-width: 4em;
+    min-width: 6em;
     display: inline-block;
     text-align: right;
 }
-.file-name {
-    font-family: ui-monospace,
-                 SFMono-Regular,
-                 Menlo,
-                 Monaco,
-                 Consolas,
-                 "Liberation Mono",
-                 monospace;
+.file-item {
+    width: max-content;
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        "Liberation Mono",
+        monospace;
     text-decoration: none;
 }
 .file-name:hover {
     text-decoration: underline;
 }
 
+pre, p>code, li>code {
+    padding: 0.2em;
+    background: #fAf6e8;
+}
 pre {
-    padding: 0.75rem;
-    background: #fAf6e0;
+    padding: 0.75em;
     overflow: auto;
 }
 code {
     font-size: 0.85em;
-    font-family: ui-monospace,
-                 SFMono-Regular,
-                 Menlo,
-                 Monaco,
-                 Consolas,
-                 "Liberation Mono",
-                 monospace;
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        "Liberation Mono",
+        monospace;
 }
