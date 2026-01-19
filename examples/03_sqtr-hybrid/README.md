@@ -17,4 +17,4 @@ A "too small" threshold sub-matrix increments the number of memory accesses (X a
 When the minimum sub-matrix does not fit in cache anymore, the number of Main Memory accesses drastically increases (`MIN_SIZE >= 40`). The fully naive case reaching more than double the number of main memory accesses.
 
 
-[See the Plots](https://parra-ca.github.io/mapanalyzer/index.html#sqtranspose)
+[See the Plots](https://parra-ca.github.io/mapanalyzer/index.html#03_sqtr-hybrid)

@@ -21,4 +21,4 @@ This example illustrates the aliasing of such a convolution for matrices of size
 
 As the size of the input matrix approaches C/A = 16, memory requests become strongly concentrated in "bursts" to a single set rather than evenly distributed across all four sets.
 
-[See the Plots](https://parra-ca.github.io/mapanalyzer/index.html#sqtranspose)
+[See the Plots](https://parra-ca.github.io/mapanalyzer/index.html#04_convolution)

@@ -22,4 +22,4 @@ The Cache Miss Ratio (CMR) is the proportion of memory accesses that result in c
 **CMR:** The recursive implementation shows about half of the cache miss ratio exhibited by the naive counterpart.
 
 
-[See the Plots](https://parra-ca.github.io/mapanalyzer/index.html#sqtranspose)
+[See the Plots](https://parra-ca.github.io/mapanalyzer/index.html#02_sqtranspose)

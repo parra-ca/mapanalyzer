@@ -14,4 +14,4 @@ Given that this array is of integers (4 bytes each), the rectangles seen are act
 # Interpretation
 In the first pass, the algorithm carries the second element (6) and bubble it up until the end. In the second pass, it moves the 3 one position to the right. In the third pass, the algorithm only reads checking that the array is in order.
 
-[See the Plots](https://parra-ca.github.io/mapanalyzer/index.html#bubblesort)
+[See the Plots](https://parra-ca.github.io/mapanalyzer/index.html#01_bubblesort)
