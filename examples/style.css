@@ -88,3 +88,69 @@ code {
         "Liberation Mono",
         monospace;
 }
+
+
+/* --- Plot thumbnail gallery --- */
+.file-list.plot-list {
+    padding-left: 0;
+    margin: 0.5em 0 0;
+    list-style: none;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 12em);
+    gap: 0.5em;
+    justify-content: space-evenly;
+    overflow: visible; /* override your .file-list overflow-x:auto */
+}
+
+.file-list.plot-list .file-item {
+    width: auto; /* override width:max-content semantics */
+    font-family: inherit; /* optional: don't force monospace in gallery */
+}
+
+.file-list.plot-list .plot-thumb {
+    display: block;
+    width: 100%;
+    height: 8em;
+
+    border-radius: 0.5em;
+    overflow: hidden;
+    background: #e6e6e6;
+    border: solid 1px #666666;
+}
+
+.file-list.plot-list .plot-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* square crop regardless of proportions */
+    display: block;
+}
+
+/* --- Modal --- */
+.img-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background: #FFFFFF88;
+    cursor: zoom-out;
+}
+
+.img-modal.is-open {
+    display: flex;
+    backdrop-filter: blur(8px);
+}
+
+.img-modal img {
+    max-width: 94vw;
+    max-height: 94vh;
+    object-fit: contain;
+    border-radius: 10pt;
+    border-style: solid;
+    border-width: 2vh 2vw;
+    border-color: white;
+    outline: solid 0.3pt black;
+}

@@ -67,7 +67,7 @@ publish:
 	rm -rf public
 	mkdir -p public/examples
 	cp -r examples/__EXPORT/. public/examples/
-	cp examples/index_template.html examples/style.css public/
+	cp examples/index_template.html examples/{style.css,plot-modal.js} public/
 	python3 examples/fill_template.py public/
 	rm -rf public/index_template.html public/examples/*/README.md
 clean:

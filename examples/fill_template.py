@@ -30,7 +30,7 @@ INDEX = "index.html"
 HTML_PLACEHOLDER = "<div>__ITEMS_PLACEHOLDER__</div>"
 BASELINK = "https://github.com/parra-ca/mapanalyzer/tree/main/examples/"
 SUBDIRS = ("maps", "pdata", "plots", "aggr")
-
+IMG_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
 def validate_root(given_root) -> Path:
     """
@@ -110,27 +110,45 @@ def render_file_groups_html(*, example_dir: Path, root: Path) -> str:
     grouped = files_by_subdir(example_dir)
     if not grouped:
         return ""
+    
     example_name = example_dir.name
     kind_list: list[str] = []
+    
     for kind_name, kind_files in grouped.items():
+        is_plots = (kind_name == "plots")
+        ul_class = "file-list plot-list" if is_plots else "file-list"
+        
         this_kind_items: list[str] = []
+        
         for p in kind_files:
-            size = human_size(p.stat().st_size)
             display_parts = p.name.split('.')
             display_parts[0] = display_parts[0].removeprefix(f'{example_name}-')
             display_parts = display_parts[:1]+display_parts[2:]
             display = '.'.join(display_parts)
-            this_kind_items.append(
-                '<li class="file-item">'
-                f'<span class="file-size">{html.escape(size)}</span> '
-                f'<a class="file-name" href="{html.escape(href(p, root=root))}">{html.escape(display)}</a>'
-                "</li>"
-            )
 
+            file_href = html.escape(href(p, root=root))
+            display_esc = html.escape(display)
+
+            if is_plots and p.suffix.lower() in IMG_EXTS:
+                this_kind_items.append(
+                    '<li class="file-item">'
+                    f'<a class="file-name plot-thumb" href="{file_href}" aria-label="{display_esc}">'
+                    f'<img src="{file_href}" alt="{display_esc}" loading="lazy" decoding="async">'
+                    "</a>"
+                    "</li>"
+                )
+            else:
+                size_esc = html.escape(human_size(p.stat().st_size))
+                this_kind_items.append(
+                    '<li class="file-item">'
+                    f'<span class="file-size">{size_esc}</span> '
+                    f'<a class="file-name" href="{file_href}">{display_esc}</a>'
+                    "</li>"
+                )
         kind_list.append(
-            '<li class="kind-item">'
+            f'<li class="kind-item {kind_name}-list">'
             f'<span class="kind-name">{html.escape(kind_name)}</span>\n'
-            f'<ul class="file-list">\n' + "\n".join(this_kind_items) + "\n</ul>\n"
+            f'<ul class="{ul_class}">\n' + "\n".join(this_kind_items) + "\n</ul>\n"
             "</li>"
         )
 
